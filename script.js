@@ -1,5 +1,21 @@
 const mainSection = document.querySelector('section');
 
+function addDefaultColour(event){
+    event.target.style.backgroundColor = 'grey';
+}
+
+function addRainbowColour(event){
+    event.target.style.backgroundColor = `rgb(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
+}
+
+function addDarkerColour(alpha){
+    return function (event){
+                    alpha += 0.1;
+                    event.target.style.backgroundColor = `rgba(128, 128, 128, ${alpha})`;
+                    }
+}
+
+
 
 function generateBoard(num){
     let i = 1;
@@ -20,17 +36,11 @@ function generateBoard(num){
     let divElements = document.querySelectorAll('.divElement');
     
     divElements.forEach((divElement) => {
-        divElement.addEventListener('mousemove', (event) => {
-            let target = event.target;
-    
-            target.style.backgroundColor = 'grey';
-            
-        })
+        divElement.addEventListener('mouseover', addDefaultColour);
     })
 }
 
 generateBoard(16);
-
 
 function resetBoard(num){
     let divElements = document.querySelectorAll('.divElement');
@@ -68,3 +78,43 @@ bttnSize.addEventListener('click', () =>{
     resetBoard(intResponse);
 
 } )
+
+
+const bttnRainbow = document.querySelector('#bttnRainbow');
+bttnRainbow.addEventListener('click', enableRainbow);
+
+const bttnShader = document.querySelector('#bttnShader');
+bttnShader.addEventListener('click', enableDarkShader);
+
+function getRandomInt(num){
+    return Math.round(Math.random() * num);
+}
+
+function enableRainbow(){
+    let divElements = document.querySelectorAll('.divElement');
+    
+    divElements.forEach((divElement) => {
+        divElement.removeEventListener('hover',addDefaultColour);
+        divElement.removeEventListener('mouseenter', addRainbowColour);
+    })
+
+    divElements.forEach((divElement) => {
+        divElement.addEventListener('mouseenter', addRainbowColour);
+    })
+}
+
+function enableDarkShader(){
+    let divElements = document.querySelectorAll('.divElement');
+
+    
+    divElements.forEach((divElement) => {
+        divElement.removeEventListener('mouseenter', addRainbowColour);
+        divElement.removeEventListener('hover', addDefaultColour);
+    })
+
+    divElements.forEach((divElement) => {
+        divElement.style.backgroundColor = 'rgba(128,128,128,0)';
+        divElement.addEventListener('mouseenter', addDarkerColour(0.1));
+    })
+}
+
