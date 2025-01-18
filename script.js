@@ -1,6 +1,5 @@
 const mainSection = document.querySelector('section');
 
-// let newDiv = document.createElement('div');
 let i = 1;
 let j = 1;
 
@@ -9,7 +8,7 @@ while(i != 16){
     divContainer.classList.add('divContainer')
     while(j != 16){
         let divElement = document.createElement('div');
-        divElement.classList.add('divStyle');
+        divElement.classList.add('divElement');
         divContainer.appendChild(divElement);
         j++;
     }
@@ -18,4 +17,14 @@ while(i != 16){
     i++;
 }
 
-console.log(i);
+
+const divElements = document.querySelectorAll('.divElement');
+
+divElements.forEach((divElement) => {
+    divElement.addEventListener('mousemove', (event) => {
+        let target = event.target;
+
+        target.style.backgroundColor = 'black';
+        
+    })
+})

@@ -2,11 +2,16 @@
     box-sizing: border-box;
 }
 
-.divStyle{
+.divElement{
     border: 1px solid black;
     height: 40px;
     width: 40px;
 }
+
+.divElement:hover{
+    background-color: black;
+}
+
 
 .divContainer{
     display: flex;
