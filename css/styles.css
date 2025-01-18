@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+
+.divStyle{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+}
+
+.divContainer{
+    display: flex;
+}
